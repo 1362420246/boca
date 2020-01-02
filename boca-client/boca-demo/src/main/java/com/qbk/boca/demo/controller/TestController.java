@@ -3,6 +3,8 @@ package com.qbk.boca.demo.controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * @author ：quboka
  * @description：
@@ -12,7 +14,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestController {
 
     @GetMapping("/")
-    public String get(){
+    public String test() throws InterruptedException {
+        TimeUnit.SECONDS.sleep(3);
         return "s";
+    }
+
+    @GetMapping("/get")
+    public String get() throws InterruptedException {
+        return "get";
     }
 }

@@ -13,7 +13,7 @@ public class FallbackController {
     public Map<String,Object> fallback(){
         Map<String,Object> map = new HashMap<String, Object>();
         map.put("status",404);
-        map.put("message","服务不存在！");
+        map.put("message","网络连接超时！");
         return map;
     }
 
