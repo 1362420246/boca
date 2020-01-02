@@ -1,0 +1,26 @@
+server:
+  port: 1131
+spring:
+  application:
+    name: boca-gateway
+  # 开启 Gateway 服务注册中心服务发现
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          #启动网关
+          enabled: true
+          #服务名小写
+          lower-case-service-id: true
+      default-filters:
+        - name: Hystrix
+          args:
+            name: fallbackcmd
+            fallbackUri: forward:/fallback
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+  client:
+    service-url:
+      defaultZone: http://localhost:1111/eureka/,http://localhost:1112/eureka/,http://localhost:1113/eureka/

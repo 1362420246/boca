@@ -1,0 +1,65 @@
+## --spring.profiles.active=server1
+
+---
+server:
+  port: 1111
+spring:
+  application:
+    name: boca-eureka
+  profiles: server1
+eureka:
+  instance: # eureak实例定义
+    # 定义 Eureka 实例所在的主机名称
+    hostname: localhost
+  client: # 客户端进行Eureka注册的配置
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:1112/eureka/,http://${eureka.instance.hostname}:1113/eureka/
+    # 该实例是否应将其信息注册到eureka
+    register-with-eureka: true
+    # 此客户端是否应从eureka获取eureka注册表信息
+    fetch-registry: true
+  server:
+    # 设置清理的间隔时间，而后这个时间使用的是毫秒单位（默认是60秒）
+    eviction-interval-timer-in-ms: 5000
+    #自我保护
+    enable-self-preservation: true
+    #更新阈值百分比 默认是 0.85
+    renewal-percent-threshold: 0.75
+---
+server:
+  port: 1112
+spring:
+  application:
+    name: boca-eureka
+  profiles: server2
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:1111/eureka/,http://${eureka.instance.hostname}:1113/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+  server:
+    eviction-interval-timer-in-ms: 5000
+    enable-self-preservation: true
+    renewal-percent-threshold: 0.75
+---
+server:
+  port: 1113
+spring:
+  application:
+    name: boca-eureka
+  profiles: server3
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:1111/eureka/,http://${eureka.instance.hostname}:1112/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+  server:
+    eviction-interval-timer-in-ms: 5000
+    enable-self-preservation: true
+    renewal-percent-threshold: 0.75
