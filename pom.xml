@@ -13,6 +13,7 @@
     <modules>
         <module>boca-service</module>
         <module>boca-client</module>
+        <module>boca-common</module>
     </modules>
 
     <properties>
