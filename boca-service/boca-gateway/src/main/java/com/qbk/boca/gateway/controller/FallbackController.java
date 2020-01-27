@@ -9,6 +9,9 @@ import java.util.Map;
 @RestController
 public class FallbackController {
 
+    /**
+     * 熔断
+     */
     @GetMapping("/fallback")
     public Map<String,Object> fallback(){
         Map<String,Object> map = new HashMap<String, Object>();

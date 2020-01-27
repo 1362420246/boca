@@ -6,17 +6,52 @@ spring:
   # 开启 Gateway 服务注册中心服务发现
   cloud:
     gateway:
+      #使用与DiscoveryClient兼容的服务注册中心注册的服务创建路由
       discovery:
         locator:
-          #启动网关
+          #启用DiscoveryClient网关集成的标记
+          #DiscoveryClient路由配置谓词和筛选器
+          #默认情况下，fateway为使用DiscoveryClient创建的路由定义单个谓词和过滤器。
+          #默认谓词是使用模式/serviceId/**定义的路径谓词，其中serviceId是来自DiscoveryClient的服务的ID。
           enabled: true
           #服务名小写
           lower-case-service-id: true
-      default-filters:
+      default-filters: #全局的默认过滤器链  但对代码配置的RouteLocator路由不起作用
+        #在默认过滤器中加入熔断机制,Hystrix是熔断机制的实现(HystrixGatewayFilterFactory)，fallbackcmd是HystrixCommand对象的名字（name属性），fallbackUri表示触发熔断机制后的跳转请求url
         - name: Hystrix
           args:
-            name: fallbackcmd
+            name: fallbackcmd #需要和下面的熔断时间中的名称对上
             fallbackUri: forward:/fallback
+#        #自定义过滤器工厂
+#        - name : Customer
+#          args:
+#            enabled: true
+      routes: #路由
+         #自定义路由1
+        - id: boca-demo
+          # 被代理的 URI
+          uri: lb://boca-demo
+          #uri以lb://开头（lb代表从注册中心获取服务），后面接的就是你需要转发到的服务名称
+          predicates: #谓词
+            - Path=/demo/** #路径谓词
+          filters: #过滤器链
+            #StripPrefixGatewayFilterFactory 过滤器
+            # Gateway默认转发是全路径的，设置StripPrefix=1表示从二级url路径转发
+            - StripPrefix=1
+        #自定义路由2
+        - id: customer_gateway_route
+          uri: lb://boca-demo
+          filters:
+          #使用自定义过滤器工厂
+          - Customer=true
+          - StripPrefix=1
+          predicates:
+          - Path=/customer-gateway/**
+
+#熔断配置参考：HystrixCommandProperties类
+hystrix.command.fallbackcmd.execution.isolation.thread.timeoutInMilliseconds: 15000
+hystrix.command.myHystrix.execution.isolation.thread.timeoutInMilliseconds: 15000
+
 eureka:
   instance:
     prefer-ip-address: true
