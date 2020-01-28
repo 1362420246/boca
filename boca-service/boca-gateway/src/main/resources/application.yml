@@ -3,6 +3,11 @@ server:
 spring:
   application:
     name: boca-gateway
+  redis:
+    host: 39.106.33.10
+    port: 6379
+    database: 0
+    password: 123456
   # 开启 Gateway 服务注册中心服务发现
   cloud:
     gateway:
@@ -47,6 +52,22 @@ spring:
           - StripPrefix=1
           predicates:
           - Path=/customer-gateway/**
+        #限流路由  限流效果：HTTP ERROR 429
+        - id: requestratelimiter_route
+          uri: lb://boca-demo
+          predicates:
+          #时间谓词 在指定时间以后的请求
+          - After=2020-01-26T00:00:00+08:00[Asia/Shanghai]
+          filters:
+          #限流过滤器 RequestRateLimiterGatewayFilterFactory 使用的算法是令牌桶算法。 使用的是Redis和lua脚本实现了令牌桶的方式 脚本:request_rate_limiter.lua
+          - name: RequestRateLimiter
+            args:
+              #用于限流的键的解析器的 Bean 对象的名字。它使用 SpEL 表达式根据#{@beanName}从 Spring 容器中获取 Bean 对象。
+              key-resolver: '#{@hostAddrKeyResolver}'
+              #令牌桶每秒填充平均速率
+              redis-rate-limiter.replenishRate: 1
+              #令牌桶总容量
+              redis-rate-limiter.burstCapacity: 2
 
 #熔断配置参考：HystrixCommandProperties类
 hystrix.command.fallbackcmd.execution.isolation.thread.timeoutInMilliseconds: 15000
