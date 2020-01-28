@@ -9,6 +9,14 @@ public class RespMap extends HashMap<String,Object> {
     {
         put("code",ResultStatus.SUCCESS.getCode());
         put("message",ResultStatus.SUCCESS.getMsg());
-        put("data",null);
+    }
+    private RespMap(Object data){
+        put("data",data);
+    }
+    public static RespMap build(Object data){
+        return new RespMap(data);
+    }
+    public static RespMap build(){
+        return build(null);
     }
 }
