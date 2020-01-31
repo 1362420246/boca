@@ -10,3 +10,33 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:1111/eureka/,http://localhost:1112/eureka/,http://localhost:1113/eureka/
+
+feign:
+  #开启Hystrix支持
+  hystrix:
+    enabled: true
+  client:
+    config:
+      default:
+        #超时时间
+        connectTimeout: 15000
+        readTimeout: 15000
+        #日志等级 参考：feign.Logger.Level
+        loggerLevel: full
+        #feign请求拦截器
+        requestInterceptors:
+        - com.qbk.boca.demo.interceptor.FooRequestInterceptor
+
+hystrix:
+  command:
+    default:
+      execution:
+        #改默认隔离策略为信号量模式  保持request和hystrix使用同一线程
+        isolation:
+          strategy: SEMAPHORE
+
+#fegin客户端服务名称和路径
+boca:
+  producer:
+    name: boca-client-producer
+    path: producer
