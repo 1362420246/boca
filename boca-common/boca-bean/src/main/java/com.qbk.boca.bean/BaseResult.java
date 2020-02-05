@@ -10,6 +10,7 @@ import java.io.Serializable;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class BaseResult<T> implements Serializable {
 
     private static final long serialVersionUID = -5272818655994280689L;

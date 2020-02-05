@@ -1,6 +1,7 @@
 package com.qbk.boca.demo.controller;
 
 import com.qbk.boca.bean.BaseResult;
+import com.qbk.boca.bean.BaseResultUtil;
 import com.qbk.boca.bean.entity.User;
 import com.qbk.boca.demo.api.UserApi;
 import com.qbk.boca.demo.api.UserClient;
@@ -59,5 +60,17 @@ public class FeignTestController {
             }
         });
     }
+
+    @GetMapping("/test")
+    public BaseResult<?> test(){
+        final BaseResult<?> test = client.getTest("测试", "测试1", "ceshi2");
+        System.out.println(test);
+        final BaseResult<String> postTest = client.postTest(new HashMap<String, Object>() {{
+            put("post测试", 233);
+        }}, "boca", "qbk");
+        System.out.println(postTest);
+        return BaseResultUtil.ok();
+    }
+
 
 }
