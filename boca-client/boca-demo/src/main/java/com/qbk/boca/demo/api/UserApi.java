@@ -30,9 +30,9 @@ public interface UserApi {
      * feign 注解 ：https://github.com/OpenFeign/feign#dynamic-query-parameters
      * 添加请求头 @Headers("Content-Type: application/json")
      */
-    @Headers("username: {username} ")
+    @Headers({"username: {username}","password: {password}"})
     @RequestLine("GET /get/user")
-    BaseResult<User> getUser(@Param("username")String username );
+    BaseResult<User> getUser(@Param("username")String username ,@Param("password")String password );
 
     /**
      * 多个请求头参数

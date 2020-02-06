@@ -48,7 +48,7 @@ public class FeignTestController {
 
     @GetMapping("/get/user")
     public BaseResult<User> getApiUser(){
-        return userApi.getUser("qbk");
+        return userApi.getUser("qbk","9527");
     }
 
     @GetMapping("/get/api/user")

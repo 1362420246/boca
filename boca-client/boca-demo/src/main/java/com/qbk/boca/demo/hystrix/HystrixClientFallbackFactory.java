@@ -19,7 +19,7 @@ public class HystrixClientFallbackFactory implements FallbackFactory<UserApi> {
     public UserApi create(Throwable throwable) {
         return new UserApi() {
             @Override
-            public BaseResult<User> getUser(String username) {
+            public BaseResult<User> getUser(String username ,String password) {
                 return BaseResultUtil.error("发生错误:" + throwable.getMessage());
             }
 
