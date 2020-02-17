@@ -26,14 +26,14 @@ feign:
         #feign请求拦截器
         requestInterceptors:
         - com.qbk.boca.demo.interceptor.FooRequestInterceptor
-
 hystrix:
   command:
-    default:
+    default: #default全局有效，service id指定应用有效
       execution:
-        #改默认隔离策略为信号量模式  保持request和hystrix使用同一线程
         isolation:
-          strategy: SEMAPHORE
+          strategy: SEMAPHORE #改默认隔离策略为信号量模式 保持request和hystrix使用同一线程
+          thread:
+            timeoutInMilliseconds: 5000
 
 #fegin客户端服务名称和路径
 boca:
