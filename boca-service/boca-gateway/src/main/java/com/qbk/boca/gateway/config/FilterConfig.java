@@ -1,5 +1,6 @@
 package com.qbk.boca.gateway.config;
 
+import com.qbk.boca.gateway.filter.LogGlobalFilter;
 import com.qbk.boca.gateway.filter.TokenGlobalFilter;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
@@ -59,5 +60,13 @@ public class FilterConfig {
     @Order(2)
     public GlobalFilter tokenToken() {
         return new TokenGlobalFilter();
+    }
+
+    /**
+     * log过滤器
+     */
+    @Bean
+    public GlobalFilter logGlobalFilter() {
+        return new LogGlobalFilter();
     }
 }
