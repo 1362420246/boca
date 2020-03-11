@@ -3,6 +3,9 @@ server:
 spring:
   application:
     name: boca-demo
+  main:
+    allow-bean-definition-overriding: true
+
 eureka:
   instance:
     prefer-ip-address: true
@@ -26,6 +29,7 @@ feign:
         #feign请求拦截器
         requestInterceptors:
         - com.qbk.boca.demo.interceptor.FooRequestInterceptor
+
 hystrix:
   command:
     default: #default全局有效，service id指定应用有效
@@ -40,3 +44,8 @@ boca:
   producer:
     name: boca-client-producer
     path: producer
+
+#配置调用指定服务生产者的负载均衡策列
+boca-client-producer: #可变参数，生产者服务的名
+  ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.ResponseTimeWeightedRule #指定策略
