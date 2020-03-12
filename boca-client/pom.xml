@@ -18,6 +18,7 @@
     <modules>
         <module>boca-demo</module>
         <module>boca-client-producer</module>
+        <module>boca-demo-nacos</module>
     </modules>
 
 </project>
