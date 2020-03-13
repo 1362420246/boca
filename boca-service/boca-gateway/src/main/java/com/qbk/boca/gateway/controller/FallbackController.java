@@ -12,6 +12,7 @@ public class FallbackController {
 
     /**
      * 熔断
+     * 要使用 RequestMapping注解 才能所有请求都熔断
      */
     @RequestMapping("/fallback")
     public Map<String,Object> fallback(){
