@@ -5,7 +5,7 @@ spring:
     name: boca-demo
   main:
     allow-bean-definition-overriding: true
-  #链路追踪给配置
+  #链路追踪的配置
   sleuth:
     sampler: #应该采样的请求的概率，配置spans导出的概率。概率(默认值:0.1，即10%)
       probability: 1
