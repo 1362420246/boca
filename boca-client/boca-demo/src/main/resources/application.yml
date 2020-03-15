@@ -5,6 +5,16 @@ spring:
     name: boca-demo
   main:
     allow-bean-definition-overriding: true
+  #链路追踪给配置
+  sleuth:
+    sampler: #应该采样的请求的概率，配置spans导出的概率。概率(默认值:0.1，即10%)
+      probability: 1
+  zipkin: #Zipkin服务器
+    base-url: http://39.106.33.10:8088/
+    service: #定制服务名称
+      name: sleuth-consume
+    sender: #把span发送到zipkin方式
+      type: web
 
 eureka:
   instance:
