@@ -23,6 +23,7 @@ spring:
 #        password: admin
 #        url: http://127.0.0.1:1121
 
+#admin/actuator相关
 management:
   endpoints:
     web:

@@ -21,6 +21,7 @@ spring:
 #        password: admin
 #        url: http://127.0.0.1:1121
 
+#admin/actuator相关
 management:
   endpoints:
     web:
@@ -29,6 +30,9 @@ management:
   endpoint:
     health:
       show-details: ALWAYS #一直显示详细的健康信息
+
+info: #配置一些自定义配置,可以从健康检查中查看到
+  name: qbk
 
 eureka:
   instance:
