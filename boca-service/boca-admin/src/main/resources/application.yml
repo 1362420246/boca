@@ -3,10 +3,42 @@ server:
 spring:
   application:
     name: boca-admin
+  #添加安全模块
+  security:
+    user:
+      name: admin
+      password: admin
+  #邮箱配置
+  boot:
+    admin:
+      notify:
+        mail:
+          to: 496524738@qq.com
+          from: 1362420246@qq.com
+  mail:
+    host: smtp.qq.com #qq邮箱的smtp地址
+    username: 1362420246@qq.com
+    password: xxxxx #qq邮箱的smtp授权码,非密码
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*' #启用所有的监控端点
+  endpoint:
+    health:
+      show-details: ALWAYS #一直显示详细的健康信息
+
+#把admin服务端注册到eureka上,可直接监控已注册的服务
 eureka:
   instance:
     prefer-ip-address: true
     instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    #获取与此实例关联的元数据名称/值对。这个信息被发送到eureka服务器，可以被其他实例使用
+    metadata-map: #其实就是个参数map
+        user: #配置security账号密码 用于监控
+          name: admin
+          password: admin
   client:
     service-url:
       defaultZone: http://localhost:1111/eureka/,http://localhost:1112/eureka/,http://localhost:1113/eureka/
