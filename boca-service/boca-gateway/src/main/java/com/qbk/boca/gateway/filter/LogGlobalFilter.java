@@ -56,11 +56,24 @@ public class LogGlobalFilter  implements GlobalFilter,Ordered {
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         //开始时间
         exchange.getAttributes().put(GatewayConstant.LOG_ATTRIBUTES, LogDTO.builder().startTime(System.currentTimeMillis()).build());
-        //请求方法
+        //请求方法 只纪录get和post
         HttpMethod method = exchange.getRequest().getMethod();
         if( !HttpMethod.GET.matches(method.name()) && !HttpMethod.POST.equals(method)){
             return chain.filter(exchange);
         }
+        //请求头 当post时候只纪录json
+        if(HttpMethod.POST.equals(method)){
+            ServerHttpRequest request = exchange.getRequest();
+            HttpHeaders headers = request.getHeaders();
+            if(!headers.containsKey("Content-Type")){
+                return chain.filter(exchange);
+            }
+            List<String> contextTypes = headers.get("Content-Type");
+            if(!contextTypes.contains("application/json")){
+                return chain.filter(exchange);
+            }
+        }
+
         //参数
         if( HttpMethod.GET.matches(method.name())){
             // 记录请求的参数信息 针对GET 请求
