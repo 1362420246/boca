@@ -21,6 +21,7 @@ public class BasicException extends RuntimeException{
      * 继承exception，加入错误状态值
      */
     public BasicException(ResultStatus resultStatus) {
+        super(resultStatus.getMsg());
         this.msg = resultStatus.getMsg();
         this.code = resultStatus.getCode();
     }
@@ -29,6 +30,7 @@ public class BasicException extends RuntimeException{
      * 自定义错误信息
      */
     public BasicException(Integer code, String message) {
+        super(message);
         this.msg = message;
         this.code = code;
     }
@@ -37,6 +39,7 @@ public class BasicException extends RuntimeException{
      * 自定义错误信息
      */
     public BasicException(String message) {
+        super(message);
         this.code = ResultStatus.FAIL.getCode();
         this.msg = message;
     }
