@@ -1,0 +1,9 @@
+server:
+  port: 1186
+spring:
+  application:
+    name: boca-demo-zookeeper
+  cloud:
+    zookeeper:
+      #需要使用bootstrap才能配置成功
+      connect-string: 39.106.33.10:8083,39.106.33.10:8084,39.106.33.10:8085

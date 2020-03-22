@@ -20,6 +20,7 @@
         <module>boca-client-producer</module>
         <module>boca-demo-nacos</module>
         <module>boca-demo-sentinel</module>
+        <module>boca-demo-zookeeper</module>
     </modules>
 
 </project>
