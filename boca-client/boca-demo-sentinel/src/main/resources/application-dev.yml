@@ -1,0 +1,20 @@
+server:
+  port: 1185
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848 #nacose 服务地址
+    sentinel:
+      transport:
+        dashboard: localhost:8080 #sentinel 服务地址
+        port: 8719 #客户端提供给dashboard访问或者查看sentinel的运行数据。默认8719，如果被占用会自动+1
+      datasource: #TreeMap 进行存储配置持久化数据源
+       flow: #数据源key，可随意编写
+          nacos:  #数据源类型，对应 file ，zk ，nacos , apollo 注意数据源的依赖要单独引入（比如 sentinel-datasource-nacos)
+            server-addr: 127.0.0.1:8848 #数据源地址
+            dataId: ${spring.application.name}-flow-rules  #对应的配置文件
+            groupId: boca_group_flow #分组
+            data_type: json  #提供两种内置的值，分别是 json 和 xml (不填默认是json)
+            rule-type: flow #配置表示该数据源中的规则属于哪种类型的规则(flow，degrade，authority，system, param-flow, gw-flow, gw-api-group)。
+            namespace: sentinel #nacos的namespace
