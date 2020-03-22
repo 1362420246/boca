@@ -18,3 +18,12 @@ spring:
             data_type: json  #提供两种内置的值，分别是 json 和 xml (不填默认是json)
             rule-type: flow #配置表示该数据源中的规则属于哪种类型的规则(flow，degrade，authority，system, param-flow, gw-flow, gw-api-group)。
             namespace: sentinel #nacos的namespace
+#sentinel有健康检查功能
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*" #启用所有的监控端点
+  endpoint:
+    health:
+      show-details: ALWAYS #一直显示详细的健康信息

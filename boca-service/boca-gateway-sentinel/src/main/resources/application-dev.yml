@@ -1,0 +1,27 @@
+server:
+  port: 1132
+spring:
+  application:
+    name: boca-gateway-sentinel
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+    sentinel:
+      transport:
+        dashboard: localhost:8080
+        port: 8719
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+#sentinel有健康检查功能
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*" #启用所有的监控端点
+  endpoint:
+    health:
+      show-details: ALWAYS #一直显示详细的健康信息

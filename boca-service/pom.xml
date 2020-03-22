@@ -19,6 +19,7 @@
         <module>boca-eureka</module>
         <module>boca-admin</module>
         <module>boca-gateway</module>
+        <module>boca-gateway-sentinel</module>
     </modules>
 
 </project>
