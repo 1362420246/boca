@@ -25,6 +25,7 @@
         <spring-boot-admin.version>2.1.6</spring-boot-admin.version>
     </properties>
 
+    <!--依赖版本-->
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -58,6 +59,29 @@
         </dependencies>
     </dependencyManagement>
 
+    <build>
+        <!-- 插件版本-->
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring-boot.version}</version>
+                    <!--重新打包为可执行jar-->
+                    <executions>
+                        <execution>
+                            <id>repackage</id>
+                            <goals>
+                                <goal>repackage</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+    <!--仓库-->
     <repositories>
         <repository>
             <id>spring-snapshots</id>
@@ -110,14 +134,5 @@
             </snapshots>
         </pluginRepository>
     </pluginRepositories>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
 
 </project>
