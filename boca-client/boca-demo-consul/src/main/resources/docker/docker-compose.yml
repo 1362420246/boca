@@ -1,0 +1,40 @@
+version: '3.6'
+services:
+  consul1:
+    image: consul:1.7.2
+    container_name: node1
+    command: agent -server -bootstrap-expect=3 -node=node1 -bind=0.0.0.0 -client=0.0.0.0 -datacenter=dc1
+    
+  consul2:
+    image: consul:1.7.2
+    container_name: node2
+    command: agent -server -retry-join=node1 -node=node2 -bind=0.0.0.0 -client=0.0.0.0 -datacenter=dc1
+    depends_on:
+        - consul1    
+        
+  consul3:
+    image: consul:1.7.2
+    container_name: node3
+    command: agent -server -retry-join=node1 -node=node3 -bind=0.0.0.0 -client=0.0.0.0 -datacenter=dc1
+    depends_on:
+        - consul1       
+
+  consul4:
+    image: consul:1.7.2
+    container_name: node4
+    command: agent -retry-join=node1 -node=ndoe4 -bind=0.0.0.0 -client=0.0.0.0 -datacenter=dc1 -ui 
+    ports:
+      - 8085:8500
+    depends_on:
+        - consul2
+        - consul3
+        
+  boca:
+    build: ./boca
+    ports:
+      - "8087:1187"
+    depends_on:
+        - consul1
+        - consul2
+        - consul3
+        - consul4

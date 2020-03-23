@@ -1,0 +1,23 @@
+server:
+  port: 1187
+spring:
+  application:
+    name: boca-demo-consul
+  cloud:
+    consul:
+      #counsl 服务端
+      host: 39.106.33.10
+      port: 8085
+      discovery:
+        #配置启动是否注册服务 默认true
+        register: true
+        #注册到consul上的服务名
+        service-name: ${spring.application.name}
+        #访问服务器时使用的主机名 ,健康检查时consul服务端回访地址
+        #hostname: LAPTOP-59R5H606
+        #健康检查路径 默认/actuator/health
+        healthCheckPath: /actuator/health
+        #健康检查频率，也就是心跳频率 默认10s
+        healthCheckInterval: 10s
+        # 健康检查失败多长时间后，取消注册 默认30s
+        health-check-critical-timeout: 15s

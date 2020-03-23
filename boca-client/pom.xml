@@ -21,6 +21,7 @@
         <module>boca-demo-nacos</module>
         <module>boca-demo-sentinel</module>
         <module>boca-demo-zookeeper</module>
+        <module>boca-demo-consul</module>
     </modules>
 
 </project>
