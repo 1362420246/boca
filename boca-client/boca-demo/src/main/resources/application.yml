@@ -1,5 +1,5 @@
 server:
-  port: 1181
+  port: 1183
 spring:
   application:
     name: boca-demo
@@ -49,8 +49,8 @@ feign:
     config:
       default:
         #超时时间
-        connectTimeout: 15000
-        readTimeout: 15000
+        connectTimeout: 6000
+        readTimeout: 10000
         #日志等级 参考：feign.Logger.Level
         loggerLevel: full
         #feign请求拦截器
@@ -64,7 +64,7 @@ hystrix:
         isolation:
           strategy: SEMAPHORE #改默认隔离策略为信号量模式 保持request和hystrix使用同一线程
           thread:
-            timeoutInMilliseconds: 5000
+            timeoutInMilliseconds: 16000
 
 #fegin客户端服务名称和路径
 boca:
