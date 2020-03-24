@@ -57,7 +57,6 @@ public class FilterConfig {
      * token过滤器
      */
     @Bean
-    @Order(2)
     public GlobalFilter tokenToken() {
         return new TokenGlobalFilter();
     }

@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
+import org.springframework.core.Ordered;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -20,12 +21,12 @@ import java.util.*;
  * token全局过滤器
  */
 @Slf4j
-public class TokenGlobalFilter implements GlobalFilter {
+public class TokenGlobalFilter implements GlobalFilter ,Ordered {
 
     /**
      * 过滤的路径
      */
-    private final List<String> IGNORE_PATH_LIST = Arrays.asList("/ailink-basic/user/login","/ailink-basic/user/logout","/user/login","/user/logout");
+    private final List<String> IGNORE_PATH_LIST = Arrays.asList("/user/login","/user/logout");
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
@@ -66,5 +67,10 @@ public class TokenGlobalFilter implements GlobalFilter {
             }
         }
         return true;
+    }
+
+    @Override
+    public int getOrder() {
+        return 0;
     }
 }
