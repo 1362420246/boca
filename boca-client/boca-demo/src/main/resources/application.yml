@@ -56,6 +56,9 @@ feign:
         #feign请求拦截器
         requestInterceptors:
         - com.qbk.boca.demo.interceptor.FooRequestInterceptor
+logging:
+  level:
+    com.qbk.boca: debug
 
 hystrix:
   command:
