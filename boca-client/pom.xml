@@ -22,6 +22,7 @@
         <module>boca-demo-sentinel</module>
         <module>boca-demo-zookeeper</module>
         <module>boca-demo-consul</module>
+        <module>boca-demo-hystrix</module>
     </modules>
 
 </project>
