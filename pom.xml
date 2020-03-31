@@ -14,6 +14,7 @@
         <module>boca-service</module>
         <module>boca-client</module>
         <module>boca-common</module>
+        <module>boca-mq</module>
     </modules>
 
     <properties>
