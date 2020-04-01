@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: boca-mq-stream-concurrency
+  cloud:
+    stream:
+      binders:
+        qbkConcurrency: #binder实例名字
+          type: rabbit #binder的类型
+          environment: #binder实例环境配置
+             spring:
+                rabbitmq:
+                  host: 39.106.33.10
+                  port: 5672
+                  username: quboka
+                  password: quboka
+      bindings:
+         qbkOutput: #Channel的名字
+          destination: concurrencyTopic #Channel 的目标 Exchange
+          content-type: application/json
+          binder: qbkConcurrency  #binder实例名字
+         qbkInput:
+          destination: concurrencyTopic
+          content-type: application/json
+          binder: qbkConcurrency
+          group: ${spring.application.name}
+          consumer:
+            concurrency: 10 # 初始/最少/空闲时 消费者数量。默认1

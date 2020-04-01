@@ -18,6 +18,7 @@
     <modules>
         <module>boca-mq-stream-provider</module>
         <module>boca-mq-stream-consumer</module>
+        <module>boca-mq-stream-concurrency</module>
     </modules>
 
 </project>
