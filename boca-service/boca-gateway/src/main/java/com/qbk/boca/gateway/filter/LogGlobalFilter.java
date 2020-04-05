@@ -15,6 +15,7 @@ import org.springframework.core.Ordered;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpRequestDecorator;
 import org.springframework.http.server.reactive.ServerHttpResponse;
@@ -31,6 +32,7 @@ import reactor.core.publisher.Mono;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 
 /**
  * 日志全局过滤器
@@ -65,15 +67,27 @@ public class LogGlobalFilter  implements GlobalFilter,Ordered {
         if(HttpMethod.POST.equals(method)){
             ServerHttpRequest request = exchange.getRequest();
             HttpHeaders headers = request.getHeaders();
-            if(!headers.containsKey("Content-Type")){
+            if(!headers.containsKey(HttpHeaders.CONTENT_TYPE)){
                 return chain.filter(exchange);
             }
-            List<String> contextTypes = headers.get("Content-Type");
-            if(!contextTypes.contains("application/json")){
+            List<String> contextTypes = headers.get(HttpHeaders.CONTENT_TYPE);
+            if(!(contextTypes.contains( MediaType.APPLICATION_JSON_VALUE)
+                    || contextTypes.contains( MediaType.APPLICATION_JSON_UTF8_VALUE))){
                 return chain.filter(exchange);
             }
         }
-
+        /*
+           TODO 忽略下载
+           临时方案从路径中忽略
+           正常应该从相应头中忽略
+           MediaType.APPLICATION_OCTET_STREAM  application/octet-stream
+         */
+        boolean isDownload = Stream.of(
+                exchange.getRequest().getPath().value().toLowerCase().split("/")
+        ).anyMatch("download"::equals);
+        if(isDownload){
+            return chain.filter(exchange);
+        }
         //参数
         if( HttpMethod.GET.matches(method.name())){
             // 记录请求的参数信息 针对GET 请求
