@@ -23,6 +23,7 @@
         <module>boca-demo-zookeeper</module>
         <module>boca-demo-consul</module>
         <module>boca-demo-hystrix</module>
+        <module>boca-demo-redis-lock</module>
     </modules>
 
 </project>

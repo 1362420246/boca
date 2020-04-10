@@ -1,0 +1,21 @@
+server:
+  port: 1189
+spring:
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password: 123456
+    timeout: 2000000
+    lettuce:
+      pool:
+        max-active: 500
+        max-idle: 20
+        min-idle: 10
+        max-wait: -1
+    database: 1
+
+#除了配置redis 还需要使用自定义配置 装配core组件种的 redis工具类
+qbk:
+  config:
+    redis:
+      enabled: true

@@ -1,3 +1,5 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
 com.qbk.boca.core.exception.CommonExceptionAdvice,\
-com.qbk.boca.core.config.IdGenerateConfig
+com.qbk.boca.core.config.IdGenerateConfig,\
+com.qbk.boca.core.config.RedisConfig,\
+com.qbk.boca.core.util.RedisUtil
