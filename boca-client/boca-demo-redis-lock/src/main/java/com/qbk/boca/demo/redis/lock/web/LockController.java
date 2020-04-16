@@ -16,7 +16,7 @@ import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 /**
- * redis分布式锁
+ * Redisson 分布式锁
  */
 @RestController
 public class LockController {
@@ -32,7 +32,9 @@ public class LockController {
      */
     @GetMapping("/syn")
     public BaseResult<?> syn(){
+        //获取锁
         RLock rLock = redissonClient.getLock("syn");
+        //尝试加锁
         if(rLock.tryLock()){
             try {
                 TimeUnit.SECONDS.sleep(50);
@@ -41,6 +43,7 @@ public class LockController {
                 e.printStackTrace();
                 return BaseResultUtil.error();
             }finally {
+                //释放锁
                 rLock.unlock();
             }
         }else {
