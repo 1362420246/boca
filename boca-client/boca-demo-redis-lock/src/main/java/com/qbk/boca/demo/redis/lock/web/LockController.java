@@ -31,11 +31,11 @@ public class LockController {
      * 分布式锁
      */
     @GetMapping("/syn")
-    public BaseResult<?> syn(){
+    public BaseResult<?> syn() throws InterruptedException {
         //获取锁
         RLock rLock = redissonClient.getLock("syn");
-        //尝试加锁
-        if(rLock.tryLock()){
+        // 尝试加锁，最多等待3秒，上锁以后100秒自动解锁
+        if(rLock.tryLock(3, 100, TimeUnit.SECONDS)){
             try {
                 TimeUnit.SECONDS.sleep(50);
                 return BaseResultUtil.ok();

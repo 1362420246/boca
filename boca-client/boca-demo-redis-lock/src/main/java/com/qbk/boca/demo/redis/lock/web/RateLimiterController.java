@@ -24,7 +24,7 @@ public class RateLimiterController {
 
     @PostConstruct
     public void init(){
-
+        //获取限流器
         rateLimiter = redissonClient.getRateLimiter("rate_limiter");
 
         // 初始化
