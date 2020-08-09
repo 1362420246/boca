@@ -15,6 +15,7 @@
         <module>boca-client</module>
         <module>boca-common</module>
         <module>boca-mq</module>
+        <module>boca-dubbo</module>
     </modules>
 
     <properties>

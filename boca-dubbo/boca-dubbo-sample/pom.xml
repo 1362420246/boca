@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.qbk</groupId>
+        <artifactId>boca-dubbo</artifactId>
+        <version>1.0.0</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <artifactId>boca-dubbo-sample</artifactId>
+    <version>1.0.0</version>
+    <name>boca-dubbo-sample</name>
+    <packaging>pom</packaging>
+    <description>dubbo-sample</description>
+
+    <modules>
+        <module>dubbo-sample-api</module>
+        <module>dubbo-sample-client</module>
+        <module>dubbo-sample-service</module>
+    </modules>
+
+</project>
