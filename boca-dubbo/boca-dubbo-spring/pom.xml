@@ -4,20 +4,21 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.qbk</groupId>
-        <artifactId>boca</artifactId>
+        <artifactId>boca-dubbo</artifactId>
         <version>1.0.0</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>boca-dubbo</artifactId>
+    <artifactId>boca-dubbo-spring</artifactId>
     <version>1.0.0</version>
-    <name>boca-dubbo</name>
+    <name>boca-dubbo-spring</name>
+    <description>dubbo-spring</description>
     <packaging>pom</packaging>
-    <description>dubbo</description>
 
     <modules>
-        <module>boca-dubbo-sample</module>
-        <module>boca-dubbo-spring</module>
+        <module>dubbo-spring-api</module>
+        <module>dubbo-spring-consumer</module>
+        <module>dubbo-spring-provider</module>
     </modules>
 
 </project>
