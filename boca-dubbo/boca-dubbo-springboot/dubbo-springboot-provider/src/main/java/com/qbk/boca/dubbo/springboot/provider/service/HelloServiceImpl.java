@@ -6,10 +6,12 @@ import org.apache.dubbo.config.annotation.DubboService;
 import org.apache.dubbo.config.annotation.Service;
 
 /**
- * 多注册中心、版本控制
+ * 多注册中心、多协议、版本控制
  */
-//@DubboService
-@DubboService(registry = {"shanghai","beijing"},version = "1.0")
+@DubboService(
+        registry = {"shanghai","beijing"},
+        protocol = {"dubbo","rest"} ,
+        version = "1.0")
 public class HelloServiceImpl implements HelloService {
 
     @Override
