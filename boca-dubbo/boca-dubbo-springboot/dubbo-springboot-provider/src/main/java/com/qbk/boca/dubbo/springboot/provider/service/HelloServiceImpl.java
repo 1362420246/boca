@@ -9,9 +9,10 @@ import org.apache.dubbo.config.annotation.Service;
  * 多注册中心、多协议、版本控制
  */
 @DubboService(
-        registry = {"shanghai","beijing"},
-        protocol = {"dubbo","rest"} ,
-        version = "1.0")
+        registry = {"shanghai","beijing"}, //多注册中心
+        protocol = {"dubbo","rest"} , //多协议
+        version = "1.0" //版本控制
+)
 public class HelloServiceImpl implements HelloService {
 
     @Override

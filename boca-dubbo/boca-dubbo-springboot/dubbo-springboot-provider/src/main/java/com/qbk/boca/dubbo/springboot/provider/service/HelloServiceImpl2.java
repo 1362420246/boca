@@ -6,7 +6,7 @@ import org.apache.dubbo.config.annotation.DubboService;
 import org.apache.dubbo.rpc.cluster.support.FailoverCluster;
 
 /**
- * 多注册中心、多协议、版本控制
+ * 多注册中心、多协议、版本控制、容错
  */
 @DubboService(
         registry = {"shanghai","beijing"},
