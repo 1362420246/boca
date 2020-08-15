@@ -28,7 +28,8 @@ public class DubboSpringBootConsumerApplication {
             version = "2.0",//版本控制
             loadbalance = RoundRobinLoadBalance.NAME , //负载均衡
             mock = "com.qbk.boca.dubbo.springboot.consumer.service.MockServiceImpl",//服务降级
-            cluster = FailfastCluster.NAME //集群容错，快速失败
+            cluster = FailfastCluster.NAME , //集群容错，快速失败
+            check = false //启动检查 默认为true
     )
     private HelloService helloService;
 
@@ -43,7 +44,8 @@ public class DubboSpringBootConsumerApplication {
      */
     @DubboReference(
             interfaceName = "com.qbk.boca.dubbo.springboot.provider.service.GeneralizationService" ,
-            generic = true //是否启用泛型调用
+            generic = true ,//是否启用泛型调用
+            check = false //启动检查 默认为true
     )
     private GenericService genericService;
 
