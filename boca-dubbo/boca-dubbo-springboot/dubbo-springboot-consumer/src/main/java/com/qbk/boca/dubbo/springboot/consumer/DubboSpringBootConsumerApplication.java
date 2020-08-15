@@ -2,8 +2,10 @@ package com.qbk.boca.dubbo.springboot.consumer;
 
 import com.qbk.boca.dubbo.springboot.api.HelloService;
 import org.apache.dubbo.config.annotation.DubboReference;
+import org.apache.dubbo.config.annotation.Method;
 import org.apache.dubbo.rpc.cluster.loadbalance.RoundRobinLoadBalance;
 import org.apache.dubbo.rpc.cluster.support.FailfastCluster;
+import org.apache.dubbo.rpc.cluster.support.FailoverCluster;
 import org.apache.dubbo.rpc.service.GenericService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -29,7 +31,10 @@ public class DubboSpringBootConsumerApplication {
             loadbalance = RoundRobinLoadBalance.NAME , //负载均衡
             mock = "com.qbk.boca.dubbo.springboot.consumer.service.MockServiceImpl",//服务降级
             cluster = FailfastCluster.NAME , //集群容错，快速失败
-            check = false //启动检查 默认为true
+            check = false , //启动检查 默认为true
+            methods = { //方法级的配置 测试优先级
+                    @Method( name= "sayHello" , timeout = 20000, retries = 2) //重试两次 每次20秒 ，最大超时时间40秒
+            }
     )
     private HelloService helloService;
 
