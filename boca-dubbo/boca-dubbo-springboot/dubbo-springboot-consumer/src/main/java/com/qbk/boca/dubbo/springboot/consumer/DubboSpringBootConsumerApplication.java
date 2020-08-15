@@ -3,6 +3,7 @@ package com.qbk.boca.dubbo.springboot.consumer;
 import com.qbk.boca.dubbo.springboot.api.HelloService;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.apache.dubbo.rpc.cluster.loadbalance.RoundRobinLoadBalance;
+import org.apache.dubbo.rpc.cluster.support.FailfastCluster;
 import org.apache.dubbo.rpc.service.GenericService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -25,9 +26,16 @@ public class DubboSpringBootConsumerApplication {
     @DubboReference(
             registry = {"shanghai","beijing"},//多注册中心
             version = "2.0",//版本控制
-            loadbalance = RoundRobinLoadBalance.NAME //负载均衡
+            loadbalance = RoundRobinLoadBalance.NAME , //负载均衡
+            mock = "com.qbk.boca.dubbo.springboot.consumer.service.MockServiceImpl",//服务降级
+            cluster = FailfastCluster.NAME //集群容错，快速失败
     )
     private HelloService helloService;
+
+    @GetMapping("/get")
+    public String get(String name){
+        return helloService.sayHello(name);
+    }
 
     /**
      * 泛化
@@ -38,11 +46,6 @@ public class DubboSpringBootConsumerApplication {
             generic = true //是否启用泛型调用
     )
     private GenericService genericService;
-
-    @GetMapping("/get")
-    public String get(String name){
-        return helloService.sayHello(name);
-    }
 
     @GetMapping("/getName")
     public String getName(String name) {

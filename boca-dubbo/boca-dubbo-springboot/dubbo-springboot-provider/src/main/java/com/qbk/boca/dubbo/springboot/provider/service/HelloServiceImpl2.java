@@ -12,7 +12,7 @@ import org.apache.dubbo.rpc.cluster.support.FailoverCluster;
         registry = {"shanghai","beijing"},
         protocol = {"dubbo","rest"} ,
         version = "2.0",
-        cluster = FailoverCluster.NAME , //容错策略 ， 2.7.5以后的版本不生效
+        cluster = FailoverCluster.NAME , //容错策略 ， 并行策略2.7.5以后的版本不生效
         retries = 5 //重试次数 ，默认两次。
 )
 public class HelloServiceImpl2 implements HelloService {
