@@ -13,4 +13,6 @@ public interface HelloService {
     @GET
     @Path("/say")
     String sayHello(String name);
+
+    QRespon sayKryo(String name);
 }

@@ -2,6 +2,7 @@ package com.qbk.boca.dubbo.springboot.provider.service;
 
 
 import com.qbk.boca.dubbo.springboot.api.HelloService;
+import com.qbk.boca.dubbo.springboot.api.QRespon;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.apache.dubbo.config.annotation.Service;
 
@@ -18,5 +19,12 @@ public class HelloServiceImpl implements HelloService {
     @Override
     public String sayHello(String name) {
         return "[version1.0]Hello "+name+" !";
+    }
+
+    @Override
+    public QRespon sayKryo(String name) {
+        QRespon respon = new QRespon();
+        respon.setData("Kryo:" + name);
+        return respon;
     }
 }

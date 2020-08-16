@@ -40,6 +40,17 @@
             <version>2.7.7</version>
             <type>pom</type>
         </dependency>
+        <!-- kryo 序列化-->
+        <dependency>
+            <groupId>com.esotericsoftware</groupId>
+            <artifactId>kryo</artifactId>
+            <version>4.0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>de.javakaffee</groupId>
+            <artifactId>kryo-serializers</artifactId>
+            <version>0.45</version>
+        </dependency>
     </dependencies>
 
     <build>

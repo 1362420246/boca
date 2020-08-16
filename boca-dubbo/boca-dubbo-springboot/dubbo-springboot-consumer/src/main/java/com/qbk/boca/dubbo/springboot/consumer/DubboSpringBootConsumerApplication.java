@@ -1,6 +1,7 @@
 package com.qbk.boca.dubbo.springboot.consumer;
 
 import com.qbk.boca.dubbo.springboot.api.HelloService;
+import com.qbk.boca.dubbo.springboot.api.QRespon;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.apache.dubbo.config.annotation.Method;
 import org.apache.dubbo.rpc.cluster.loadbalance.RoundRobinLoadBalance;
@@ -41,6 +42,11 @@ public class DubboSpringBootConsumerApplication {
     @GetMapping("/get")
     public String get(String name){
         return helloService.sayHello(name);
+    }
+
+    @GetMapping("/getKryo")
+    public QRespon getKryo(String name){
+        return helloService.sayKryo(name);
     }
 
     /**

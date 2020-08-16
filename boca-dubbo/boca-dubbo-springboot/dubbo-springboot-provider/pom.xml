@@ -24,21 +24,35 @@
             <artifactId>dubbo-springboot-api</artifactId>
             <version>1.0.0</version>
         </dependency>
+        <!--dubbo-->
         <dependency>
             <groupId>org.apache.dubbo</groupId>
             <artifactId>dubbo-spring-boot-starter</artifactId>
             <version>2.7.7</version>
         </dependency>
+        <!--nacos-->
         <dependency>
             <groupId>com.alibaba.nacos</groupId>
             <artifactId>nacos-client</artifactId>
             <version>1.2.1</version>
         </dependency>
+        <!--zk-->
         <dependency>
             <groupId>org.apache.dubbo</groupId>
             <artifactId>dubbo-dependencies-zookeeper</artifactId>
             <version>2.7.7</version>
             <type>pom</type>
+        </dependency>
+        <!-- kryo 序列化-->
+        <dependency>
+            <groupId>com.esotericsoftware</groupId>
+            <artifactId>kryo</artifactId>
+            <version>4.0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>de.javakaffee</groupId>
+            <artifactId>kryo-serializers</artifactId>
+            <version>0.45</version>
         </dependency>
     </dependencies>
 
