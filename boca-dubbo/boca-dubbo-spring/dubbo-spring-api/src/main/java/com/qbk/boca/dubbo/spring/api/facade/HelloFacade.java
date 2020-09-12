@@ -1,10 +1,10 @@
-package com.qbk.boca.dubbo.spring.api;
+package com.qbk.boca.dubbo.spring.api.facade;
 
 import com.qbk.boca.dubbo.spring.api.dto.ParamDTO;
 
 import javax.validation.Valid;
 
-public interface HelloService {
+public interface HelloFacade {
 
     String sayHello(@Valid ParamDTO dto);
 }
