@@ -1,0 +1,43 @@
+spring:
+  application:
+    name: spring-cloud-provider-test
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+
+server:
+  port: 9015
+
+dubbo:
+  cloud:
+    #服务消费方订阅服务提供方的应用名称的列表，若需订阅多应用，使用 "," 分割。
+    subscribed-services: ${spring.application.name}
+  scan:
+    #扫描dubbo服务
+    base-packages: com.qbk.boca.dubbo.spring.provider.facade
+  protocol:
+    name: dubbo
+    port: -1
+    #数据长度 80m
+    payload: 83886080
+  provider:
+    #超时  5分钟
+    timeout: 300000
+    #容错 快速失败
+    cluster: failfast
+
+hbase:
+  config:
+    #指定zk的地址，多个用“,”分割
+    hbase.zookeeper.quorum: hbase01:2181,hbase02:2181,hbase03:2181
+    hbase.zookeeper.znode: /hbase
+
+elasticsearch:
+  configs:
+    - hostname: hbase03
+      port: 9200
+    - hostname: hbase04
+      port: 9200
+    - hostname: hbase05
+      port: 9200
