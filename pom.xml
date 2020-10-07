@@ -16,6 +16,7 @@
         <module>boca-common</module>
         <module>boca-mq</module>
         <module>boca-dubbo</module>
+        <module>boca-transaction</module>
     </modules>
 
     <properties>

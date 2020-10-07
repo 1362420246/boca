@@ -1,0 +1,31 @@
+server:
+  port: 1202
+
+spring:
+  application:
+    name: seata-at-b
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/seata_b?useSSL=false&useUnicode=true&characterEncoding=UTF-8
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: root
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 39.106.33.10:8848
+
+# Seata 配置项
+seata:
+  enabled: true
+  application-id: ${spring.application.name}
+  tx-service-group: ${spring.application.name}-group
+  service:
+    # 虚拟组和分组的映射
+    vgroup-mapping: # key 为 tx-service-group
+      seata-at-b-group: default
+  registry:
+    type: nacos
+    nacos: #和seata-service的registry.conf里的配置一致
+      application: seata-server
+      serverAddr: 39.106.33.10:8848
+      group: SEATA_GROUP
