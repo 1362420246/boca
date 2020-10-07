@@ -11,9 +11,15 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class TestAService {
 
+    /**
+     * 本地 mapper调用
+     */
     @Autowired
     private TestAMapper testAMapper;
 
+    /**
+     * feign 调用
+     */
     @Autowired
     private SeataAtBdemoApi seataAtBdemoApi;
 
@@ -24,9 +30,11 @@ public class TestAService {
     @Transactional(rollbackFor = Exception.class)
     public void update(){
         System.out.println("当前 XID:" + RootContext.getXID());
+        //本地 mapper调用
         testAMapper.update();
+        //feign 调用
         seataAtBdemoApi.update();
+        //回滚异常
         int a = 10/0;
     }
-
 }
