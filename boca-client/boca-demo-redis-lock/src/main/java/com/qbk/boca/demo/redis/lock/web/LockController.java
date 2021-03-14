@@ -6,10 +6,12 @@ import com.qbk.boca.bean.BaseResultUtil;
 import com.qbk.boca.bean.entity.User;
 import com.qbk.boca.core.exception.BasicException;
 import com.qbk.boca.core.util.RedisUtil;
+import com.qbk.boca.demo.redis.lock.annotation.DistributedLock;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Optional;
@@ -28,7 +30,7 @@ public class LockController {
     private RedissonClient redissonClient;
 
     /**
-     * 分布式锁
+     * Redisson 分布式锁
      */
     @GetMapping("/syn")
     public BaseResult<?> syn() throws InterruptedException {
@@ -51,6 +53,21 @@ public class LockController {
         }
     }
 
+
+    /**
+     * Redisson 注解 分布式锁
+     */
+    @GetMapping("/lock")
+    @DistributedLock(key = "qbklocl")
+    public BaseResult<?> lock(@RequestParam(value = "second",defaultValue = "20") Integer second)
+            throws InterruptedException {
+        TimeUnit.SECONDS.sleep(second);
+        return BaseResultUtil.ok();
+    }
+
+    /**
+     * RedisTemplate 测试
+     */
     @GetMapping("/set")
     public BaseResult<?> set(){
         User user = User.builder().id(1).username("qbk").build();
@@ -58,6 +75,9 @@ public class LockController {
         return BaseResultUtil.ok(set);
     }
 
+    /**
+     * RedisTemplate 测试
+     */
     @GetMapping("/get")
     public BaseResult<?> get(){
         final JSONObject jsonObject = redisUtil.get("user:qbk");
