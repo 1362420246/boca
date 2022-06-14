@@ -17,6 +17,7 @@
         <module>boca-mq</module>
         <module>boca-dubbo</module>
         <module>boca-transaction</module>
+        <module>boca-jsonrpc</module>
     </modules>
 
     <properties>
